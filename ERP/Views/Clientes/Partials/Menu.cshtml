@@ -1,0 +1,29 @@
+﻿@model List<ERP.Controllers.ClientesController.funcion>
+
+<style>
+    .btnMenu {
+        min-width: 130px;
+        min-height: 50px;
+    }
+
+    .margen-abajo-10 {
+        margin-bottom: 10px;
+    }
+</style>
+<div class="row">
+    <div class="col-xs-12 col-md-5">
+        @foreach (var funcionItem in Model)
+        {
+            <div class="col-md-12">
+                <button class="btn btn-default btnMenu margen-abajo-10" style="width: 100%;">
+                    <i class="fa @funcionItem.icono_c"></i> @funcionItem.nombre_c
+                </button>
+            </div>
+        }
+    </div>
+    <div class="col-md-5 hidden-xs">
+        <div style="border: solid 1px #ddd">
+            Info
+        </div>
+    </div>
+</div>

@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TallerMecanicoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="taller_cliente">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dni_c" Type="nvarchar" MaxLength="10" />
+          <Property Name="nombre_c" Type="nvarchar" MaxLength="30" />
+          <Property Name="apellido1_c" Type="nvarchar" MaxLength="30" />
+          <Property Name="apelllido2_c" Type="nvarchar" MaxLength="30" />
+          <Property Name="telefono_c" Type="nvarchar" MaxLength="16" />
+          <Property Name="direccion_c" Type="nvarchar" MaxLength="255" />
+          <Property Name="localidad_c" Type="nvarchar" MaxLength="60" />
+        </EntityType>
+        <EntityType Name="taller_vehiculo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="matricula_c" Type="nvarchar" MaxLength="20" />
+          <Property Name="marca_c" Type="nvarchar" MaxLength="30" />
+          <Property Name="modelo_c" Type="nvarchar" MaxLength="30" />
+          <Property Name="cliente_xref" Type="int" />
+        </EntityType>
+        <Association Name="FK_vehiculo_cliente">
+          <End Role="taller_cliente" Type="Self.taller_cliente" Multiplicity="0..1" />
+          <End Role="taller_vehiculo" Type="Self.taller_vehiculo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="taller_cliente">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="taller_vehiculo">
+              <PropertyRef Name="cliente_xref" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TallerMecanicoModelStoreContainer">
+          <EntitySet Name="taller_cliente" EntityType="Self.taller_cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="taller_vehiculo" EntityType="Self.taller_vehiculo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_vehiculo_cliente" Association="Self.FK_vehiculo_cliente">
+            <End Role="taller_cliente" EntitySet="taller_cliente" />
+            <End Role="taller_vehiculo" EntitySet="taller_vehiculo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TallerMecanicoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="taller_cliente">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dni_c" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="nombre_c" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="apellido1_c" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="apelllido2_c" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="telefono_c" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="direccion_c" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="localidad_c" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="taller_vehiculo" Relationship="Self.FK_vehiculo_cliente" FromRole="taller_cliente" ToRole="taller_vehiculo" />
+        </EntityType>
+        <EntityType Name="taller_vehiculo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="matricula_c" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="marca_c" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="modelo_c" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="cliente_xref" Type="Int32" />
+          <NavigationProperty Name="taller_cliente" Relationship="Self.FK_vehiculo_cliente" FromRole="taller_vehiculo" ToRole="taller_cliente" />
+        </EntityType>
+        <Association Name="FK_vehiculo_cliente">
+          <End Role="taller_cliente" Type="Self.taller_cliente" Multiplicity="0..1" />
+          <End Role="taller_vehiculo" Type="Self.taller_vehiculo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="taller_cliente">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="taller_vehiculo">
+              <PropertyRef Name="cliente_xref" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TallerMecanicoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="taller_cliente" EntityType="Self.taller_cliente" />
+          <EntitySet Name="taller_vehiculo" EntityType="Self.taller_vehiculo" />
+          <AssociationSet Name="FK_vehiculo_cliente" Association="Self.FK_vehiculo_cliente">
+            <End Role="taller_cliente" EntitySet="taller_cliente" />
+            <End Role="taller_vehiculo" EntitySet="taller_vehiculo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TallerMecanicoModelStoreContainer" CdmEntityContainer="TallerMecanicoEntities">
+          <EntitySetMapping Name="taller_cliente">
+            <EntityTypeMapping TypeName="TallerMecanicoModel.taller_cliente">
+              <MappingFragment StoreEntitySet="taller_cliente">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="dni_c" ColumnName="dni_c" />
+                <ScalarProperty Name="nombre_c" ColumnName="nombre_c" />
+                <ScalarProperty Name="apellido1_c" ColumnName="apellido1_c" />
+                <ScalarProperty Name="apelllido2_c" ColumnName="apelllido2_c" />
+                <ScalarProperty Name="telefono_c" ColumnName="telefono_c" />
+                <ScalarProperty Name="direccion_c" ColumnName="direccion_c" />
+                <ScalarProperty Name="localidad_c" ColumnName="localidad_c" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="taller_vehiculo">
+            <EntityTypeMapping TypeName="TallerMecanicoModel.taller_vehiculo">
+              <MappingFragment StoreEntitySet="taller_vehiculo">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="matricula_c" ColumnName="matricula_c" />
+                <ScalarProperty Name="marca_c" ColumnName="marca_c" />
+                <ScalarProperty Name="modelo_c" ColumnName="modelo_c" />
+                <ScalarProperty Name="cliente_xref" ColumnName="cliente_xref" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,27 @@
+﻿@model List<ERP.Models.clientes>
+@using ERP.App_GlobalResources
+
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <th>@Recurso.nombre</th>
+            <th>@Recurso.apellido</th>
+            <th>@Recurso.telefono</th>
+            <th>@Recurso.dni</th>
+            <th>@Recurso.cita</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var clienteItem in Model)
+        {
+            <tr>
+                <td>@clienteItem.nombre_c</td>
+                <td>@clienteItem.apellido_c</td>
+                <td>@clienteItem.telefono_c</td>
+                <td>@clienteItem.dni_c</td>
+                <td>@Recurso.si / @Recurso.no</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
