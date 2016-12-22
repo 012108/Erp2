@@ -1,11 +1,50 @@
 ﻿@{
     ViewBag.Title = "Inicio";
 }
+
 <div class="panel panel-default">
     <div class="panel-heading">
-        Principal
+        Gestión de productos
     </div>
     <div class="panel-body">
+        @*if(contador%4 == 0) añadir row, para elegir filas de 4 o de la cantidad que queramos*@
+        <div class="row">
+            <div class="col-md-12 producto-box">
+                <div style="padding-left: 160px;">
+                    <div style="min-width: 160px; margin-left: -180px; float: left;">
+                        <img src="https://images-na.ssl-images-amazon.com/images/I/71-lHu3tOoL._SY606_.jpg" height="175" width="150" />
+                    </div>
+                    <div style="padding-left: 2%; width:97.6%; float: left;">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a href="#">Protos - Vino Roble - 75 cl</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="row margen-arriba-10">
+                                    <span style="font-weight: bold;">EUR 6,48</span> <span style="text-decoration: line-through!important;" class="small">EUR 7</span>
+                                </div>
+                                <div class="row margen-arriba-10">
+                                    Más opciones
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="row">
+                                    Rating ******
+                                </div>
+                                <div class="row">
+                                    Categoria etc
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
 
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 </div>

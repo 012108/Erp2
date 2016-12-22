@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="16054f99b9474164be02f523069b9e93" Name="Diagram1">
+        <EntityTypeShape EntityType="ErpModel.erp_categorias" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="ErpModel.erp_clientes" Width="1.5" PointX="5.25" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ErpModel.erp_funciones" Width="1.5" PointX="8.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ErpModel.erp_funciones_permisos" Width="1.5" PointX="11" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ErpModel.erp_grupos" Width="1.5" PointX="8.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ErpModel.erp_modulos" Width="1.5" PointX="11.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ErpModel.erp_modulos_permisos" Width="1.5" PointX="14" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ErpModel.erp_ofertas" Width="1.5" PointX="6" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ErpModel.erp_pedidos" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ErpModel.erp_pedidos_item" Width="1.5" PointX="5.25" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ErpModel.erp_productos" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ErpModel.erp_productos_categorias" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ErpModel.erp_productos_ofertas" Width="1.5" PointX="8.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ErpModel.erp_usuarios" Width="1.5" PointX="11" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ErpModel.erp_departamentos" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="ErpModel.FK_erp_productos_erp_categorias" ManuallyRouted="false" />
+        <AssociationConnector Association="ErpModel.FK_erp_clientes_erp_pedidos" ManuallyRouted="false" />
+        <AssociationConnector Association="ErpModel.FK_erp_funciones_erp_funciones" ManuallyRouted="false" />
+        <AssociationConnector Association="ErpModel.FK_erp_funciones_permisos_erp_funciones" ManuallyRouted="false" />
+        <AssociationConnector Association="ErpModel.FK_erp_funciones_permisos_erp_grupos" ManuallyRouted="false" />
+        <AssociationConnector Association="ErpModel.FK_erp_modulos_permisos_erp_grupos" ManuallyRouted="false" />
+        <AssociationConnector Association="ErpModel.FK_erp_usuarios_erp_grupos" ManuallyRouted="false" />
+        <AssociationConnector Association="ErpModel.FK_erp_modulos_permisos_erp_modulos" ManuallyRouted="false" />
+        <AssociationConnector Association="ErpModel.FK_erp_productos_ofertas_erp_ofertas" ManuallyRouted="false" />
+        <AssociationConnector Association="ErpModel.FK_erp_pedidos_item_erp_pedidos" ManuallyRouted="false" />
+        <AssociationConnector Association="ErpModel.FK_erp_pedidos_item_erp_productos" ManuallyRouted="false" />
+        <AssociationConnector Association="ErpModel.FK_erp_productos_ofertas_erp_productos" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

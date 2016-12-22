@@ -17,9 +17,8 @@ namespace ERP.Controllers
         }
         public ActionResult List()
         {
-            var lstClientes = db.clientes.ToList();
 
-            return PartialView("Partials/List", lstClientes);
+            return PartialView("Partials/List");
         }
         public ActionResult Menu()
         {

@@ -13,10 +13,10 @@ namespace ERP.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class erpEntities : DbContext
+    public partial class sqlEntities : DbContext
     {
-        public erpEntities()
-            : base("name=erpEntities")
+        public sqlEntities()
+            : base("name=sqlEntities")
         {
         }
     
@@ -26,7 +26,7 @@ namespace ERP.Models
         }
     
         public virtual DbSet<erp_categorias> erp_categorias { get; set; }
-        public virtual DbSet<erp_departamentos> erp_departamentos { get; set; }
+        public virtual DbSet<erp_clientes> erp_clientes { get; set; }
         public virtual DbSet<erp_funciones> erp_funciones { get; set; }
         public virtual DbSet<erp_funciones_permisos> erp_funciones_permisos { get; set; }
         public virtual DbSet<erp_grupos> erp_grupos { get; set; }
@@ -39,5 +39,6 @@ namespace ERP.Models
         public virtual DbSet<erp_productos_categorias> erp_productos_categorias { get; set; }
         public virtual DbSet<erp_productos_ofertas> erp_productos_ofertas { get; set; }
         public virtual DbSet<erp_usuarios> erp_usuarios { get; set; }
+        public virtual DbSet<erp_departamentos> erp_departamentos { get; set; }
     }
 }

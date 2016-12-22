@@ -4,61 +4,495 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="erpModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="clientes">
+    <Schema Namespace="erpModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="erp_categorias">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nombre_c" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="apellido_c" Type="varchar" MaxLength="60" Nullable="false" />
-          <Property Name="telefono_c" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="dni_c" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="fechaAlta_dt" Type="datetime" Precision="0" Nullable="false" />
-          <Property Name="fechaBaja_dt" Type="datetime" Precision="0" Nullable="false" />
-          <Property Name="sexo_b" Type="bool" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="erp_departamentos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="activo" Type="bool" Nullable="false" />
+        </EntityType>
+        <EntityType Name="erp_funciones">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="icono_small" Type="varchar" MaxLength="100" />
+          <Property Name="icono_big" Type="varchar" MaxLength="100" />
+          <Property Name="url" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="activo" Type="bool" Nullable="false" />
+          <Property Name="menu" Type="bool" Nullable="false" />
+          <Property Name="modulo_x" Type="int" Nullable="false" />
+          <Property Name="funcion_x" Type="int" />
+        </EntityType>
+        <EntityType Name="erp_funciones_permisos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="funcion_x" Type="int" Nullable="false" />
+          <Property Name="fecha_ini" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="fecha_fin" Type="datetime" Precision="0" />
+          <Property Name="grupo_x" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="erp_grupos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="erp_modulos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="icono_small" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="icono_big" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="url" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="activo" Type="bool" Nullable="false" />
+        </EntityType>
+        <EntityType Name="erp_modulos_permisos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="modulo_x" Type="int" Nullable="false" />
+          <Property Name="usuario_x" Type="int" />
+          <Property Name="fecha_ini" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="fecha_fin" Type="datetime" Precision="0" />
+          <Property Name="grupo_x" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="erp_ofertas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="int" Nullable="false" />
+          <Property Name="oferta" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="fecha_ini" Type="datetime" Precision="0" />
+          <Property Name="fecha_fin" Type="datetime" Precision="0" />
+        </EntityType>
+        <EntityType Name="erp_pedidos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha_pedido" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="cliente_x" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="erp_pedidos_item">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pedido_x" Type="int" Nullable="false" />
+          <Property Name="cantidad" Type="int" Nullable="false" />
+          <Property Name="total_bruto" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="total_descuento" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="producto_x" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="erp_productos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="imagen" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="stock" Type="int" Nullable="false" />
+          <Property Name="precio" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="categoria_x" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="erp_productos_categorias">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="producto_x" Type="int" Nullable="false" />
+          <Property Name="categoria_x" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="erp_productos_ofertas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="producto_x" Type="int" Nullable="false" />
+          <Property Name="oferta_x" Type="int" Nullable="false" />
+          <Property Name="fecha_ini" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="fecha_fin" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="erp_usuarios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="apellido" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="telefono" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="grupo_x" Type="int" Nullable="false" />
         </EntityType>
         <EntityContainer Name="erpModelStoreContainer">
-          <EntitySet Name="clientes" EntityType="Self.clientes" Schema="erp" store:Type="Tables" />
+          <EntitySet Name="erp_categorias" EntityType="Self.erp_categorias" Schema="erp" store:Type="Tables" />
+          <EntitySet Name="erp_departamentos" EntityType="Self.erp_departamentos" Schema="erp" store:Type="Tables" />
+          <EntitySet Name="erp_funciones" EntityType="Self.erp_funciones" Schema="erp" store:Type="Tables" />
+          <EntitySet Name="erp_funciones_permisos" EntityType="Self.erp_funciones_permisos" Schema="erp" store:Type="Tables" />
+          <EntitySet Name="erp_grupos" EntityType="Self.erp_grupos" Schema="erp" store:Type="Tables" />
+          <EntitySet Name="erp_modulos" EntityType="Self.erp_modulos" Schema="erp" store:Type="Tables" />
+          <EntitySet Name="erp_modulos_permisos" EntityType="Self.erp_modulos_permisos" Schema="erp" store:Type="Tables" />
+          <EntitySet Name="erp_ofertas" EntityType="Self.erp_ofertas" Schema="erp" store:Type="Tables" />
+          <EntitySet Name="erp_pedidos" EntityType="Self.erp_pedidos" Schema="erp" store:Type="Tables" />
+          <EntitySet Name="erp_pedidos_item" EntityType="Self.erp_pedidos_item" Schema="erp" store:Type="Tables" />
+          <EntitySet Name="erp_productos" EntityType="Self.erp_productos" Schema="erp" store:Type="Tables" />
+          <EntitySet Name="erp_productos_categorias" EntityType="Self.erp_productos_categorias" Schema="erp" store:Type="Tables" />
+          <EntitySet Name="erp_productos_ofertas" EntityType="Self.erp_productos_ofertas" Schema="erp" store:Type="Tables" />
+          <EntitySet Name="erp_usuarios" EntityType="Self.erp_usuarios" Schema="erp" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="erpModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="clientes">
+        <EntityContainer Name="erpEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="erp_categorias" EntityType="erpModel.erp_categorias" />
+          <EntitySet Name="erp_departamentos" EntityType="erpModel.erp_departamentos" />
+          <EntitySet Name="erp_funciones" EntityType="erpModel.erp_funciones" />
+          <EntitySet Name="erp_funciones_permisos" EntityType="erpModel.erp_funciones_permisos" />
+          <EntitySet Name="erp_grupos" EntityType="erpModel.erp_grupos" />
+          <EntitySet Name="erp_modulos" EntityType="erpModel.erp_modulos" />
+          <EntitySet Name="erp_modulos_permisos" EntityType="erpModel.erp_modulos_permisos" />
+          <EntitySet Name="erp_ofertas" EntityType="erpModel.erp_ofertas" />
+          <EntitySet Name="erp_pedidos" EntityType="erpModel.erp_pedidos" />
+          <EntitySet Name="erp_pedidos_item" EntityType="erpModel.erp_pedidos_item" />
+          <EntitySet Name="erp_productos" EntityType="erpModel.erp_productos" />
+          <EntitySet Name="erp_productos_categorias" EntityType="erpModel.erp_productos_categorias" />
+          <EntitySet Name="erp_productos_ofertas" EntityType="erpModel.erp_productos_ofertas" />
+          <EntitySet Name="erp_usuarios" EntityType="erpModel.erp_usuarios" />
+        </EntityContainer>
+        <EntityType Name="erp_categorias">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre_c" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="apellido_c" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="telefono_c" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="dni_c" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="fechaAlta_dt" Type="DateTime" Nullable="false" />
-          <Property Name="fechaBaja_dt" Type="DateTime" Nullable="false" />
-          <Property Name="sexo_b" Type="Boolean" Nullable="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityContainer Name="erpEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="clientes" EntityType="Self.clientes" />
-        </EntityContainer>
+        <EntityType Name="erp_departamentos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="erp_funciones">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="icono_small" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="icono_big" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="url" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+          <Property Name="menu" Type="Boolean" Nullable="false" />
+          <Property Name="modulo_x" Type="Int32" Nullable="false" />
+          <Property Name="funcion_x" Type="Int32" />
+        </EntityType>
+        <EntityType Name="erp_funciones_permisos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="funcion_x" Type="Int32" Nullable="false" />
+          <Property Name="fecha_ini" Type="DateTime" Nullable="false" />
+          <Property Name="fecha_fin" Type="DateTime" />
+          <Property Name="grupo_x" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="erp_grupos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="erp_modulos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="icono_small" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="icono_big" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="url" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="erp_modulos_permisos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="modulo_x" Type="Int32" Nullable="false" />
+          <Property Name="usuario_x" Type="Int32" />
+          <Property Name="fecha_ini" Type="DateTime" Nullable="false" />
+          <Property Name="fecha_fin" Type="DateTime" />
+          <Property Name="grupo_x" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="erp_ofertas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="Int32" Nullable="false" />
+          <Property Name="oferta" Type="Decimal" Nullable="false" />
+          <Property Name="fecha_ini" Type="DateTime" />
+          <Property Name="fecha_fin" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="erp_pedidos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha_pedido" Type="DateTime" Nullable="false" />
+          <Property Name="estado" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="cliente_x" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="erp_pedidos_item">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pedido_x" Type="Int32" Nullable="false" />
+          <Property Name="cantidad" Type="Int32" Nullable="false" />
+          <Property Name="total_bruto" Type="Decimal" Nullable="false" />
+          <Property Name="total_descuento" Type="Decimal" Nullable="false" />
+          <Property Name="producto_x" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="erp_productos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="imagen" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="stock" Type="Int32" Nullable="false" />
+          <Property Name="precio" Type="Decimal" Nullable="false" />
+          <Property Name="categoria_x" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="erp_productos_categorias">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="producto_x" Type="Int32" Nullable="false" />
+          <Property Name="categoria_x" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="erp_productos_ofertas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="producto_x" Type="Int32" Nullable="false" />
+          <Property Name="oferta_x" Type="Int32" Nullable="false" />
+          <Property Name="fecha_ini" Type="DateTime" Nullable="false" />
+          <Property Name="fecha_fin" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="erp_usuarios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="apellido" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="grupo_x" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="erpModelStoreContainer" CdmEntityContainer="erpEntities">
-          <EntitySetMapping Name="clientes">
-            <EntityTypeMapping TypeName="erpModel.clientes">
-              <MappingFragment StoreEntitySet="clientes">
+          <EntitySetMapping Name="erp_categorias">
+            <EntityTypeMapping TypeName="erpModel.erp_categorias">
+              <MappingFragment StoreEntitySet="erp_categorias">
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="nombre_c" ColumnName="nombre_c" />
-                <ScalarProperty Name="apellido_c" ColumnName="apellido_c" />
-                <ScalarProperty Name="telefono_c" ColumnName="telefono_c" />
-                <ScalarProperty Name="dni_c" ColumnName="dni_c" />
-                <ScalarProperty Name="fechaAlta_dt" ColumnName="fechaAlta_dt" />
-                <ScalarProperty Name="fechaBaja_dt" ColumnName="fechaBaja_dt" />
-                <ScalarProperty Name="sexo_b" ColumnName="sexo_b" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="erp_departamentos">
+            <EntityTypeMapping TypeName="erpModel.erp_departamentos">
+              <MappingFragment StoreEntitySet="erp_departamentos">
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="erp_funciones">
+            <EntityTypeMapping TypeName="erpModel.erp_funciones">
+              <MappingFragment StoreEntitySet="erp_funciones">
+                <ScalarProperty Name="funcion_x" ColumnName="funcion_x" />
+                <ScalarProperty Name="modulo_x" ColumnName="modulo_x" />
+                <ScalarProperty Name="menu" ColumnName="menu" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="icono_big" ColumnName="icono_big" />
+                <ScalarProperty Name="icono_small" ColumnName="icono_small" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="erp_funciones_permisos">
+            <EntityTypeMapping TypeName="erpModel.erp_funciones_permisos">
+              <MappingFragment StoreEntitySet="erp_funciones_permisos">
+                <ScalarProperty Name="grupo_x" ColumnName="grupo_x" />
+                <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+                <ScalarProperty Name="fecha_ini" ColumnName="fecha_ini" />
+                <ScalarProperty Name="funcion_x" ColumnName="funcion_x" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="erp_grupos">
+            <EntityTypeMapping TypeName="erpModel.erp_grupos">
+              <MappingFragment StoreEntitySet="erp_grupos">
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="erp_modulos">
+            <EntityTypeMapping TypeName="erpModel.erp_modulos">
+              <MappingFragment StoreEntitySet="erp_modulos">
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="icono_big" ColumnName="icono_big" />
+                <ScalarProperty Name="icono_small" ColumnName="icono_small" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="erp_modulos_permisos">
+            <EntityTypeMapping TypeName="erpModel.erp_modulos_permisos">
+              <MappingFragment StoreEntitySet="erp_modulos_permisos">
+                <ScalarProperty Name="grupo_x" ColumnName="grupo_x" />
+                <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+                <ScalarProperty Name="fecha_ini" ColumnName="fecha_ini" />
+                <ScalarProperty Name="usuario_x" ColumnName="usuario_x" />
+                <ScalarProperty Name="modulo_x" ColumnName="modulo_x" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="erp_ofertas">
+            <EntityTypeMapping TypeName="erpModel.erp_ofertas">
+              <MappingFragment StoreEntitySet="erp_ofertas">
+                <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+                <ScalarProperty Name="fecha_ini" ColumnName="fecha_ini" />
+                <ScalarProperty Name="oferta" ColumnName="oferta" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="erp_pedidos">
+            <EntityTypeMapping TypeName="erpModel.erp_pedidos">
+              <MappingFragment StoreEntitySet="erp_pedidos">
+                <ScalarProperty Name="cliente_x" ColumnName="cliente_x" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="fecha_pedido" ColumnName="fecha_pedido" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="erp_pedidos_item">
+            <EntityTypeMapping TypeName="erpModel.erp_pedidos_item">
+              <MappingFragment StoreEntitySet="erp_pedidos_item">
+                <ScalarProperty Name="producto_x" ColumnName="producto_x" />
+                <ScalarProperty Name="total_descuento" ColumnName="total_descuento" />
+                <ScalarProperty Name="total_bruto" ColumnName="total_bruto" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="pedido_x" ColumnName="pedido_x" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="erp_productos">
+            <EntityTypeMapping TypeName="erpModel.erp_productos">
+              <MappingFragment StoreEntitySet="erp_productos">
+                <ScalarProperty Name="categoria_x" ColumnName="categoria_x" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="stock" ColumnName="stock" />
+                <ScalarProperty Name="imagen" ColumnName="imagen" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="erp_productos_categorias">
+            <EntityTypeMapping TypeName="erpModel.erp_productos_categorias">
+              <MappingFragment StoreEntitySet="erp_productos_categorias">
+                <ScalarProperty Name="categoria_x" ColumnName="categoria_x" />
+                <ScalarProperty Name="producto_x" ColumnName="producto_x" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="erp_productos_ofertas">
+            <EntityTypeMapping TypeName="erpModel.erp_productos_ofertas">
+              <MappingFragment StoreEntitySet="erp_productos_ofertas">
+                <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+                <ScalarProperty Name="fecha_ini" ColumnName="fecha_ini" />
+                <ScalarProperty Name="oferta_x" ColumnName="oferta_x" />
+                <ScalarProperty Name="producto_x" ColumnName="producto_x" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="erp_usuarios">
+            <EntityTypeMapping TypeName="erpModel.erp_usuarios">
+              <MappingFragment StoreEntitySet="erp_usuarios">
+                <ScalarProperty Name="grupo_x" ColumnName="grupo_x" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

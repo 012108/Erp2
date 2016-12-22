@@ -6,8 +6,10 @@
     <title>@ViewBag.Title - ERP Plaiaundi</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" rel="stylesheet">
-
+    <link href="~/Content/css/font-awesome.css" type="text/css" rel="stylesheet">
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </head>
 <body>
     <div class="navbar navbar-default navbar-fixed-top">
@@ -31,23 +33,26 @@
             </div>
         </div>
     </div>
-    <div class="body-content" style="margin-top: 20px;">
-        <div class="row">
-            <div class="col-md-2">
-                @Html.Action("menuLeft", "Home")
-            </div>
-            <div class="col-md-10">
+
+    <div class="wrapper">
+        <div class="row row-offcanvas row-offcanvas-left">
+            @*<div class="col-md-2">
+
+                </div>
+                <div class="col-md-10">
+                    @RenderBody()
+                </div>*@
+            @Html.Action("menuLeft", "Home")
+            <div class="column col-sm-10 col-xs-10" id="main">
                 @RenderBody()
             </div>
         </div>
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - ERP Plaiaundi &copy;</p>
-        </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    <hr />
+    <footer>
+        <p>&copy; @DateTime.Now.Year - ERP Plaiaundi &copy;</p>
+    </footer>
+
 </body>
 </html>
